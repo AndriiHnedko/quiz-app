@@ -7,6 +7,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import FieldCategory from '../components/FieldCategory';
+import {categories} from '../service/categories';
 
 const FieldCategoryList = () => {
   const [scrollVisible, setScrollVisible] = useState(true);
@@ -40,25 +41,25 @@ const FieldCategoryList = () => {
 
   // funcTest();
 
+  const _renderCategories = () => {
+    return categories.map((el, id) => (
+      <FieldCategory title={el.name} id={el.id} key={el.name + id} />
+    ));
+  };
+
   return (
     <View style={styles.container}>
       <Animated.View style={[animatedStyleMain, styles.main]}>
-        <FieldCategory title="test1" />
+        <FieldCategory title="test1" id={342} />
       </Animated.View>
       {scrollVisible && (
-        <Animated.View style={animatedStyleScroll}>
+        <Animated.View style={{...animatedStyleScroll}}>
           <ScrollView
             scrollEventThrottle={16}
             showsVerticalScrollIndicator={false}
-            style={{paddingHorizontal: 20, paddingBottom: 20}}>
-            <FieldCategory title="test" />
-            <FieldCategory title="test" />
-            <FieldCategory title="test" />
-            <FieldCategory title="test" />
-            <FieldCategory title="test" />
-            <FieldCategory title="test" />
-            <FieldCategory title="test" />
-            <FieldCategory title="test" />
+            style={{paddingHorizontal: 20, paddingTop: 30}}>
+            {_renderCategories()}
+            <View style={{height: 30}}></View>
           </ScrollView>
         </Animated.View>
       )}
