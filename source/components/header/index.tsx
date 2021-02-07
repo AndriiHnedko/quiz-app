@@ -5,8 +5,10 @@ import {setReset} from '../../redux/actions';
 import {RootStateType} from '../../redux/rootReducer';
 import HeaderContainer from './HeaderContainer';
 import AnimatedTitle from './HeaderTitle';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const Header = () => {
+  const duration = 2000;
   const dispatch = useDispatch();
   const currentCategory = useSelector(
     (state: RootStateType) => state.home.category,
@@ -22,14 +24,14 @@ const Header = () => {
       config={{
         height: {from: 100, to: 70},
         borderRadius: {from: 30, to: 0},
-        duration: 2000,
+        duration: duration,
       }}>
       <AnimatedTitle
         focused={currentCategory == undefined}
         config={{
           opacity: {from: 1, to: 0},
           translateY: {from: 30, to: -40},
-          duration: 2000,
+          duration: duration,
         }}>
         <Text style={[styles.text, styles.nameTitle]}>Quiz App</Text>
       </AnimatedTitle>
@@ -38,16 +40,14 @@ const Header = () => {
         config={{
           opacity: {from: 1, to: 0},
           translateY: {from: -10, to: 20},
-          duration: 2000,
+          duration: duration,
         }}
-        style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        style={[styles.categoryTitleContainer]}>
         <Text style={[styles.text, styles.categoryTitle]}>
           {currentCategory?.name}
         </Text>
         <TouchableOpacity onPress={opPressClose}>
-          <Text style={{paddingRight: 30, fontSize: 20, color: 'white'}}>
-            x
-          </Text>
+          <Icon name="close" color="white" size={24} />
         </TouchableOpacity>
       </AnimatedTitle>
     </HeaderContainer>
@@ -70,6 +70,11 @@ const styles = StyleSheet.create({
   categoryTitle: {
     paddingLeft: 30,
     fontSize: 20,
+  },
+  categoryTitleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingRight: 25,
   },
 });
 
