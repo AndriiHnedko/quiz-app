@@ -6,23 +6,7 @@ import Animated, {
   withTiming,
   Easing,
 } from 'react-native-reanimated';
-
-type ItemConfig = {
-  from: number;
-  to: number;
-};
-
-type ConfigAnimation = {
-  opacity?: ItemConfig;
-  translateY?: ItemConfig;
-  duration?: number;
-};
-
-type DefaultConfigAnimation = {
-  opacity: ItemConfig;
-  translateY: ItemConfig;
-  duration: number;
-};
+import {ConfigAnimation} from '../../service/types';
 
 type TitleProps = {
   focused: boolean;
@@ -37,14 +21,14 @@ const AnimatedTitle: React.FC<TitleProps> = ({
   children,
   config,
 }) => {
-  const defaultConfig: DefaultConfigAnimation = {
+  const defaultConfig: ConfigAnimation = {
     opacity: config?.opacity ? config.opacity : {from: 0, to: 1},
     translateY: config?.translateY ? config.translateY : {from: 0, to: 0},
     duration: config?.duration ? config.duration : 500,
   };
 
-  const translateY = useSharedValue(defaultConfig.translateY.from);
-  const opacity = useSharedValue(defaultConfig.opacity.from);
+  const translateY = useSharedValue(defaultConfig.translateY!.from);
+  const opacity = useSharedValue(defaultConfig.opacity!.from);
   const animatedStyleTitle = useAnimatedStyle(() => ({
     transform: [{translateY: translateY.value}],
     opacity: opacity.value,
@@ -66,8 +50,11 @@ const AnimatedTitle: React.FC<TitleProps> = ({
 
   useEffect(() => {
     focused
-      ? animateTitle(defaultConfig.translateY.from, defaultConfig.opacity.from)
-      : animateTitle(defaultConfig.translateY.to, defaultConfig.opacity.to);
+      ? animateTitle(
+          defaultConfig.translateY!.from,
+          defaultConfig.opacity!.from,
+        )
+      : animateTitle(defaultConfig.translateY!.to, defaultConfig.opacity!.to);
   }, [focused]);
 
   return (
