@@ -14,12 +14,17 @@ import {defaultConfigAnimations} from '../../service/services';
 type PropsType = {
   config?: ConfigAnimation;
   children: React.ReactNode;
+  hide: boolean;
 };
 
-const CategoryListContainer: React.FC<PropsType> = ({children, config}) => {
+const CategoryListContainer: React.FC<PropsType> = ({
+  children,
+  config,
+  hide,
+}) => {
   const {duration, translateY} = defaultConfigAnimations(config);
   const homeState = useSelector((state: RootStateType) => state.home);
-  const {category, difficulty} = homeState;
+  const {category, questions} = homeState;
   const [contentVisibility, setContentVisibility] = useState(true);
   const scrollTranslateY = useSharedValue(translateY!.from);
 
@@ -47,17 +52,17 @@ const CategoryListContainer: React.FC<PropsType> = ({children, config}) => {
   }, [category, contentVisibility, duration]);
 
   useEffect(() => {
-    if (category !== undefined && contentVisibility) {
+    if (hide && contentVisibility) {
       hideList();
     }
-    if (category == undefined && !contentVisibility) {
+    if (!hide && !contentVisibility) {
       showList();
     }
-  }, [category, showList, hideList, contentVisibility]);
+  }, [hide, showList, hideList, contentVisibility]);
 
   return (
     <>
-      {!difficulty && (
+      {questions.length === 0 && (
         <Animated.View style={[animatedStyleScroll, styles.container]}>
           {contentVisibility && children}
         </Animated.View>

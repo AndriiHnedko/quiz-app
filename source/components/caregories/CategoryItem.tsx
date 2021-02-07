@@ -6,12 +6,12 @@ import {setCategoty} from '../../redux/actions';
 type Props = {
   title: string;
   id: number;
+  onPressCategory: (name: string, id: number) => void;
 };
 
-const CategoryItem: React.FC<Props> = ({title, id}) => {
-  const dispatch = useDispatch();
+const CategoryItem: React.FC<Props> = ({title, id, onPressCategory}) => {
   const onPress = () => {
-    dispatch(setCategoty({name: title, id: id}));
+    onPressCategory(title, id);
   };
   return (
     <TouchableOpacity onPress={onPress}>
