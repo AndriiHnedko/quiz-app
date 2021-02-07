@@ -3,7 +3,7 @@ import {StatusBar, StyleSheet, View} from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
 import FieldCategory from '../components/FieldCategory';
 import FieldCategoryList from '../components/FieldCategoryList';
-import Header from '../components/Header';
+import Header from '../components/header/index';
 
 const Home = () => {
   return (
