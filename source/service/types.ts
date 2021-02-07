@@ -5,8 +5,10 @@ export type ItemConfig = {
 
 export type ConfigAnimation = {
   duration?: number;
+  delay?: number;
   opacity?: ItemConfig;
   translateY?: ItemConfig;
+  translateX?: ItemConfig;
   height?: ItemConfig;
   borderRadius?: ItemConfig;
 };
