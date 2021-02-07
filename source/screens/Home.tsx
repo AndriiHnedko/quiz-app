@@ -1,8 +1,7 @@
 import React from 'react';
 import {StatusBar, StyleSheet, View} from 'react-native';
 import SafeAreaView from 'react-native-safe-area-view';
-import FieldCategory from '../components/FieldCategory';
-import FieldCategoryList from '../components/FieldCategoryList';
+import Categories from '../components/caregories';
 import Header from '../components/header/index';
 
 const Home = () => {
@@ -14,7 +13,7 @@ const Home = () => {
       />
       <View style={styles.container}>
         <Header />
-        <FieldCategoryList />
+        <Categories />
       </View>
     </SafeAreaView>
   );

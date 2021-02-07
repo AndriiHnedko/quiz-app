@@ -18,7 +18,8 @@ type PropsType = {
 
 const CategoryListContainer: React.FC<PropsType> = ({children, config}) => {
   const {duration, translateY} = defaultConfigAnimations(config);
-  const category = useSelector((state: RootStateType) => state.home.category);
+  const homeState = useSelector((state: RootStateType) => state.home);
+  const {category, difficulty} = homeState;
   const [contentVisibility, setContentVisibility] = useState(true);
   const scrollTranslateY = useSharedValue(translateY!.from);
 
@@ -55,9 +56,13 @@ const CategoryListContainer: React.FC<PropsType> = ({children, config}) => {
   }, [category, showList, hideList, contentVisibility]);
 
   return (
-    <Animated.View style={[animatedStyleScroll, styles.container]}>
-      {contentVisibility && children}
-    </Animated.View>
+    <>
+      {!difficulty && (
+        <Animated.View style={[animatedStyleScroll, styles.container]}>
+          {contentVisibility && children}
+        </Animated.View>
+      )}
+    </>
   );
 };
 
