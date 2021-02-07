@@ -5,12 +5,16 @@ import {
   SET_DIFFICULTY,
   SET_QUESTIONS,
   RESET,
+  SET_LOADING,
+  SET_TOKEN,
 } from './types';
 
 const initialState: GlobalStateType = {
   category: undefined,
   difficulty: undefined,
-  questions: undefined,
+  questions: [],
+  loading: false,
+  token: undefined,
 };
 
 export const home = (
@@ -24,15 +28,31 @@ export const home = (
         category: action.category,
       };
     case SET_DIFFICULTY:
-      return state;
+      return {...state, difficulty: action.difficulty};
+    case SET_LOADING:
+      return {
+        ...state,
+        loading: action.loading,
+      };
     case SET_QUESTIONS:
-      return state;
+      return {
+        ...state,
+        questions: action.questions,
+        loading: false,
+      };
+    case SET_TOKEN:
+      return {
+        ...state,
+        token: action.token,
+      };
     case RESET:
       return {
         ...state,
         category: undefined,
         difficulty: undefined,
-        questions: undefined,
+        questions: [],
+        token: undefined,
+        loading: false,
       };
     default:
       return state;
