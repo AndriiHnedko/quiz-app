@@ -1,14 +1,14 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {setCategoty} from '../redux/actions';
+import {setCategoty} from '../../redux/actions';
 
 type Props = {
   title: string;
   id: number;
 };
 
-const FieldCategory: React.FC<Props> = ({title, id}) => {
+const CategoryItem: React.FC<Props> = ({title, id}) => {
   const dispatch = useDispatch();
   const onPress = () => {
     dispatch(setCategoty({name: title, id: id}));
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FieldCategory;
+export default CategoryItem;
