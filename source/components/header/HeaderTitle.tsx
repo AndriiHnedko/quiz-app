@@ -6,27 +6,23 @@ import Animated, {
   withTiming,
   Easing,
 } from 'react-native-reanimated';
+import {defaultConfigAnimations} from '../../service/services';
 import {ConfigAnimation} from '../../service/types';
 
-type TitleProps = {
+type PropsType = {
   focused: boolean;
   style?: StyleProp<Animated.AnimateStyle<ViewStyle>>;
   children: React.ReactNode;
   config?: ConfigAnimation;
 };
 
-const AnimatedTitle: React.FC<TitleProps> = ({
+const AnimatedTitle: React.FC<PropsType> = ({
   focused,
   style = {},
   children,
   config,
 }) => {
-  const defaultConfig: ConfigAnimation = {
-    opacity: config?.opacity ? config.opacity : {from: 0, to: 1},
-    translateY: config?.translateY ? config.translateY : {from: 0, to: 0},
-    duration: config?.duration ? config.duration : 500,
-  };
-
+  const defaultConfig = defaultConfigAnimations(config);
   const translateY = useSharedValue(defaultConfig.translateY!.from);
   const opacity = useSharedValue(defaultConfig.opacity!.from);
   const animatedStyleTitle = useAnimatedStyle(() => ({
