@@ -65,5 +65,7 @@ export const getQuestions = (
       newToken.token,
     );
     dispatch(setQuestions(questions.results));
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };

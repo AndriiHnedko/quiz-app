@@ -1,7 +1,5 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {setCategoty} from '../../redux/actions';
 
 type Props = {
   title: string;
